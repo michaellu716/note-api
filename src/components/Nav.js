@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
-import './App.css';
-import Nav from './components/Nav';
-import List from './components/List';
-import Note from './components/Note';
+import React from 'react';
 
-class App extends Component {
+class Nav extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Nav />
-        <List />
-        <Note />
+      <div className="nav-container">
+        <div className="nav-logo">Note</div>
+        <div className="nav-button">
+          + Note
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default Nav;
