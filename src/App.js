@@ -18,7 +18,8 @@ class App extends Component {
   }
   toggleNote = () => {
     this.setState({
-      showNote: ! this.state.showNote
+      showNote: ! this.state.showNote,
+      note: {}
     });
   }
 
@@ -33,11 +34,24 @@ class App extends Component {
      .then((res) => this.setState({ note: res.data, showNote: true }) )
      .catch((err) => console.log(err.response.data) );
   }
-
-  submitNote = (data) => {
-     axios.post(urlFor('notes'), data)
+  performSubmissionRequest = (data, id) => {
+    if (id) {
+     return axios.patch(urlFor(`notes/${id}`), data);
+    } else {
+     return axios.post(urlFor('notes'), data);
+    }
+  }
+  submitNote = (data, id) => {
+      this.performSubmissionRequest(data, id)
      .then((res) => this.setState({ showNote: false }) )
      .catch((err) => console.log(err.response.data) );
+  }
+
+  deleteNote = (id) => {
+    const newNotesState = this.state.notes.filter((note) => note.id !== id );
+    axios.delete(urlFor(`notes/${id}`))
+    .then((res) => this.setState({ notes: newNotesState }))
+    .catch((err) => console.log(err.response.data) );
   }
     render() {
      const { showNote, notes, note } = this.state;
@@ -55,6 +69,7 @@ class App extends Component {
              getNotes={this.getNotes}
              notes={notes}
              getNote={this.getNote}
+             deleteNote={this.deleteNote}
            />
          }
       </div>
