@@ -53,6 +53,7 @@ class App extends Component {
     .then((res) => this.setState({ notes: newNotesState }))
     .catch((err) => console.log(err.response.data) );
   }
+
     render() {
      const { showNote, notes, note } = this.state;
 
