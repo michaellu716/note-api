@@ -40,7 +40,7 @@ class Note extends React.Component {
             <input
               className="tag-input"
               type="text"
-              placeholder="Tag Name..."
+              placeholder="#Tag Name..."
               ref={(input) => this.name = input}
              />
           </form>
@@ -59,21 +59,22 @@ class Note extends React.Component {
           <span className="delete">
             <i className="material-icons">delete</i>
           </span>
-          {tag.name}
+          #{tag.name}
         </div>
       );
     }
   }
 
   render() {
-    const { note, closeTagForm } = this.props;
+    const { note } = this.props;
 
     return (
       <div className="note-container">
+        <h1>Edit Note</h1>
         <form
         className="note-form"
         onSubmit={(e) => this.onSubmit(e)}
-        onClick={() => closeTagForm()}
+        onClick={() => this.closeTagForm()}
         >
           <input
             className="note-title-input"
